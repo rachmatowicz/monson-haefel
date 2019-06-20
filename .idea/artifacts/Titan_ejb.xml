@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="ejb-jar" name="Titan:ejb">
+    <output-path>$PROJECT_DIR$/out/artifacts/Titan_ejb</output-path>
+    <root id="archive" name="Titan_ejb.jar">
+      <element id="artifact" artifact-name="Titan:ejb exploded" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

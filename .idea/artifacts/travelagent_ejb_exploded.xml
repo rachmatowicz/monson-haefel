@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ejb" name="travelagent:ejb exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/travelagent_ejb_exploded.rar</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="travelagent/ejb/EJB" />
+      <element id="module-output" name="travelagent" />
+    </root>
+  </artifact>
+</component>

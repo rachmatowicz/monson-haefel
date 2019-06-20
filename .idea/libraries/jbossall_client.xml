@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jbossall-client">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/jboss/jboss-4.2.0.GA/client/jbossall-client.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
