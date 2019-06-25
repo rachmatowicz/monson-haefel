@@ -7,5 +7,14 @@
             <ejb-name>CabinEJB</ejb-name>
             <jndi-name>CabinHomeRemote</jndi-name>
         </entity>
+        <entity>
+            <ejb-name>CustomerEJB</ejb-name>
+            <jndi-name>CustomerHomeRemote</jndi-name>
+        </entity>
+        <entity>
+            <ejb-name>AddressEJB</ejb-name>
+            <local-jndi-name>AddressHomeLocal</local-jndi-name>
+        </entity>
     </enterprise-beans>
 </jboss>
+

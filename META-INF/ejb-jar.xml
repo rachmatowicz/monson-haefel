@@ -6,6 +6,7 @@
          version="2.1">
 
     <enterprise-beans>
+        <!-- CabinEJB -->
         <entity>
             <ejb-name>CabinEJB</ejb-name>
             <home>com.titan.cabin.CabinHomeRemote</home>
@@ -15,21 +16,121 @@
             <prim-key-class>java.lang.Integer</prim-key-class>
             <reentrant>false</reentrant>
             <abstract-schema-name>Cabin</abstract-schema-name>
-            <cmp-field><field-name>id</field-name></cmp-field>
-            <cmp-field><field-name>name</field-name></cmp-field>
-            <cmp-field><field-name>deckLevel</field-name></cmp-field>
-            <cmp-field><field-name>shipId</field-name></cmp-field>
-            <cmp-field><field-name>bedCount</field-name></cmp-field>
+            <cmp-field>
+                <field-name>id</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>name</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>deckLevel</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>shipId</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>bedCount</field-name>
+            </cmp-field>
             <primkey-field>id</primkey-field>
-            <security-identity><use-caller-identity/></security-identity>
+            <security-identity>
+                <use-caller-identity/>
+            </security-identity>
+        </entity>
+        <!-- CustomerEJB -->
+        <entity>
+            <ejb-name>CustomerEJB</ejb-name>
+            <home>com.titan.customer.CustomerHomeRemote</home>
+            <remote>com.titan.customer.CustomerRemote</remote>
+            <ejb-class>com.titan.customer.CustomerBean</ejb-class>
+            <persistence-type>Container</persistence-type>
+            <prim-key-class>java.lang.Integer</prim-key-class>
+            <!-- loopbacks are not allowed -->
+            <reentrant>false</reentrant>
+            <cmp-version>2.x</cmp-version>
+            <abstract-schema-name>Customer</abstract-schema-name>
+            <cmp-field>
+                <field-name>id</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>lastName</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>firstName</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>hasGoodCredit</field-name>
+            </cmp-field>
+            <primkey-field>id</primkey-field>
+            <security-identity>
+                <use-caller-identity/>
+            </security-identity>
+        </entity>
+        <!-- AddressEJB -->
+        <entity>
+            <ejb-name>AddressEJB</ejb-name>
+            <local-home>com.titan.address.AddressHomeLocal</local-home>
+            <local>com.titan.address.AddressLocal</local>
+            <ejb-class>com.titan.address.AddressBean</ejb-class>
+            <persistence-type>Container</persistence-type>
+            <prim-key-class>java.lang.Integer</prim-key-class>
+            <reentrant>false</reentrant>
+            <cmp-version>2.x</cmp-version>
+            <abstract-schema-name>AddressEJB</abstract-schema-name>
+            <cmp-field>
+                <field-name>id</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>street</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>city</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>state</field-name>
+            </cmp-field>
+            <cmp-field>
+                <field-name>zip</field-name>
+            </cmp-field>
+            <primkey-field>id</primkey-field>
+            <security-identity>
+                <use-caller-identity></use-caller-identity>
+            </security-identity>
         </entity>
     </enterprise-beans>
+
+    <relationships>
+        <ejb-relation>
+            <ejb-relation-name>Customer-Address</ejb-relation-name>
+            <ejb-relationship-role>
+                <ejb-relationship-role-name>Customer-has-an-Address</ejb-relationship-role-name>
+                <multiplicity>One</multiplicity>
+                <relationship-role-source>
+                    <ejb-name>CustomerEJB</ejb-name>
+                </relationship-role-source>
+                <cmr-field>
+                    <cmr-field-name>homeAddress</cmr-field-name>
+                </cmr-field>
+            </ejb-relationship-role>
+            <ejb-relationship-role>
+                <ejb-relationship-role-name>Address-belongs-to-Customer</ejb-relationship-role-name>
+                <multiplicity>One</multiplicity>
+                <relationship-role-source>
+                    <ejb-name>AddressEJB</ejb-name>
+                </relationship-role-source>
+            </ejb-relationship-role>
+        </ejb-relation>
+    </relationships>
 
     <assembly-descriptor>
         <security-role>
             <description>This role represents everyone who is allowed full access to the CabinEJB</description>
             <role-name>everyone</role-name>
         </security-role>
+        <security-role>
+            <description>This role represents only Employees in Titan</description>
+            <role-name>Employees</role-name>
+        </security-role>
+
         <method-permission>
             <role-name>everyone</role-name>
             <method>
@@ -37,9 +138,29 @@
                 <method-name>*</method-name>
             </method>
         </method-permission>
+        <method-permission>
+            <role-name>Employees</role-name>
+            <method>
+                <ejb-name>CustomerEJB</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <method>
+                <ejb-name>AddressEJB</ejb-name>
+                <method-name>*</method-name>
+            </method>
+        </method-permission>
+
         <container-transaction>
             <method>
                 <ejb-name>CabinEJB</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <method>
+                <ejb-name>CustomerEJB</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <method>
+                <ejb-name>AddressEJB</ejb-name>
                 <method-name>*</method-name>
             </method>
             <trans-attribute>Required</trans-attribute>
