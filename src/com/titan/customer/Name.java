@@ -1,6 +1,7 @@
 package com.titan.customer;
 
 public class Name implements java.io.Serializable {
+
     private String lastname;
     private String firstName;
 

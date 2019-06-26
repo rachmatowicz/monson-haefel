@@ -1,20 +1,13 @@
 package com.titan.cabin;
 
+import com.titan.ship.ShipLocal;
+
+import javax.ejb.CreateException;
 import javax.ejb.EntityContext;
 
 public abstract class CabinBean implements javax.ejb.EntityBean {
 
-    // added by RA
-    private static final long serialVersionUID = 1113799434508676095L;
-
-    public Integer ejbCreate(Integer id) throws javax.ejb.CreateException {
-        this.setId(id);
-        return null;
-    }
-
-    public void ejbPostCreate(Integer id) {
-        // no implementation
-    }
+    // persistence fields
 
     public abstract void setId(Integer id);
     public abstract Integer getId();
@@ -26,6 +19,30 @@ public abstract class CabinBean implements javax.ejb.EntityBean {
     public abstract int getBedCount();
     public abstract void setDeckLevel(int level);
     public abstract int getDeckLevel();
+
+    // relationship fields
+    public abstract void setShip(ShipLocal ship);
+    public abstract ShipLocal getShip();
+
+    // standard callback methods
+
+    public Integer ejbCreate(Integer id) throws javax.ejb.CreateException {
+        this.setId(id);
+        return null;
+    }
+
+    public void ejbPostCreate(Integer id) {
+        // no implementation
+    }
+
+    public Integer ejbCreate(ShipLocal ship, String name) throws CreateException {
+        this.setName(name);
+        return null;
+    }
+
+    public void ejbPostCreate(ShipLocal ship, String name) {
+        this.setShip(ship);
+    }
 
     public void setEntityContext(EntityContext ctx) {
         // empty implementation

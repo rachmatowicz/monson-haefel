@@ -23,7 +23,30 @@
               <use-caller-identity/>
           </security-identity>
       </session>
-
+      <session>
+          <ejb-name>Test71EJB</ejb-name>
+          <home>com.titan.clients.Test71HomeRemote</home>
+          <remote>com.titan.clients.Test71Remote</remote>
+          <ejb-class>com.titan.clients.Test71Bean</ejb-class>
+          <session-type>Stateless</session-type>
+          <transaction-type>Container</transaction-type>
+      </session>
+      <session>
+          <ejb-name>Test72EJB</ejb-name>
+          <home>com.titan.clients.Test72HomeRemote</home>
+          <remote>com.titan.clients.Test72Remote</remote>
+          <ejb-class>com.titan.clients.Test72Bean</ejb-class>
+          <session-type>Stateless</session-type>
+          <transaction-type>Container</transaction-type>
+      </session>
+      <session>
+          <ejb-name>Test73EJB</ejb-name>
+          <home>com.titan.clients.Test73HomeRemote</home>
+          <remote>com.titan.clients.Test73Remote</remote>
+          <ejb-class>com.titan.clients.Test73Bean</ejb-class>
+          <session-type>Stateless</session-type>
+          <transaction-type>Container</transaction-type>
+      </session>
   </enterprise-beans>
 
     <assembly-descriptor>

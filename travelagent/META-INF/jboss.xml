@@ -11,5 +11,17 @@
                 <jndi-name>CabinHomeRemote</jndi-name>
             </ejb-ref>
         </session>
+        <session>
+            <ejb-name>Test71EJB</ejb-name>
+            <jndi-name>Test71HomeRemote</jndi-name>
+        </session>
+        <session>
+            <ejb-name>Test72EJB</ejb-name>
+            <jndi-name>Test72HomeRemote</jndi-name>
+        </session>
+        <session>
+            <ejb-name>Test73EJB</ejb-name>
+            <jndi-name>Test73HomeRemote</jndi-name>
+        </session>
     </enterprise-beans>
 </jboss>
